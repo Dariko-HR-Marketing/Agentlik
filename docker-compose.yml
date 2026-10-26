@@ -1,0 +1,6 @@
+services:
+  agentlik-erp:
+    build: .
+    restart: always
+    ports:
+      - "80:80"
