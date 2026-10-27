@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   LayoutGrid, 
-  CheckSquare2, 
+  CheckSquare, 
   FileEdit, 
   Lightbulb, 
   BookOpen, 
@@ -40,7 +40,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       group: 'РАБОТА',
       items: [
         { id: 'dashboard', label: 'Обзор', icon: LayoutGrid },
-        { id: 'my-tasks', label: 'Мои задачи', icon: CheckSquare2 },
+        { id: 'my-tasks', label: 'Мои задачи', icon: CheckSquare },
         { id: 'notes', label: 'Заметки', icon: FileEdit },
         { id: 'brainstorm', label: 'Брейншторм', icon: Lightbulb },
         { id: 'knowledge', label: 'База знаний', icon: BookOpen },
