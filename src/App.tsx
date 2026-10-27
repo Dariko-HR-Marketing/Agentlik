@@ -6,6 +6,7 @@ import { DashboardOverview } from './components/DashboardOverview';
 import { CRMView } from './components/CRMView';
 import { FinanceView } from './components/FinanceView';
 import { ProjectsView } from './components/ProjectsView';
+import { TasksView } from './components/TasksView';
 import { PeopleView } from './components/PeopleView';
 import { AIView } from './components/AIView';
 import { 
@@ -408,21 +409,22 @@ export function App() {
           )}
 
           {/* ПРОЕКТЫ */}
-          {currentTab === 'projects' && <ProjectsView projects={projects} />}
+          {currentTab === 'projects' && (
+            <ProjectsView 
+              projects={projects} 
+              onAddProject={(p) => setProjects([{ ...p, id: `p-${Date.now()}`, progress: 0, tasks_count: 0, completed_tasks: 0 }, ...projects])}
+              onDeleteProject={(id) => setProjects(projects.filter(p => p.id !== id))}
+            />
+          )}
 
           {/* ЗАДАЧИ */}
           {currentTab === 'tasks' && (
-            <div className="p-8 max-w-5xl mx-auto space-y-6">
-              <h2 className="text-2xl font-bold text-slate-900">Все задачи агентства</h2>
-              <div className="bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100 shadow-xs">
-                {tasks.map(t => (
-                  <div key={t.id} className="p-4 flex items-center justify-between hover:bg-slate-50">
-                    <span className="text-xs font-bold text-slate-900">{t.title}</span>
-                    <span className="text-xs text-slate-500">{t.project} • {t.assignee}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <TasksView 
+              tasks={tasks}
+              onAddTask={(t) => setTasks([{ ...t, id: Date.now().toString() }, ...tasks])}
+              onToggleTask={(id) => setTasks(tasks.map(t => t.id === id ? { ...t, status: t.status === 'done' ? 'todo' : 'done' } : t))}
+              onDeleteTask={(id) => setTasks(tasks.filter(t => t.id !== id))}
+            />
           )}
 
           {/* CRM */}
